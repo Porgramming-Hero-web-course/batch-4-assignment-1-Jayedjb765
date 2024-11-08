@@ -1,0 +1,108 @@
+Type Guards help code more readable and developer friendly. Type Guard is also called type narrowing. They promote type safety by allowing developers to break down types, reducing runtime errors and making code easier to comprehend and maintain.
+
+For example we can take both number and string for addition . In this case Type Guard help us to make decision for taking next step. If we get one string then we will convert both in string and concatenation them and if we get both number then we add the number.
+
+There are various type of types Guards. For example   typeof,instanceof,in 
+Typeof Type Guard : It helps to narrow down permeative type like string, number, Boolean.
+Example 1:
+type Checktype  =  string | number
+
+    const add = (num1: Checktype , num2 : Checktype) : Checktype =>{
+        if (typeof num1 === 'number' && typeof num2 === 'number'){
+            return num1 + num2;
+
+        }else{
+            return num1.toString() + num2.toString()
+        }
+    }
+
+    const sum = add("5","3");
+    console.log(sum);
+
+
+instanceof Type Guard : It helps us to identify whether the object is the instance of the class or not. By identifying them we  can access that class property. 
+Example 2: 
+ class Animal {
+       
+        constructor(public name : string, public species : string ){
+
+        }
+        makesound () {
+            console.log("I amd making sound")
+        }
+
+
+    }
+    class Dog extends Animal{
+        constructor(name: string , species : string ){
+            super(name,species)
+        }
+        makeMewow(){
+            console.log("I amd making sound Mewow" )
+        }
+    }
+    class Cat extends Animal{
+        constructor(name: string , species : string ){
+            super(name,species)
+        }
+        makeBark(){
+            console.log("I amd making sound barking" )
+        }
+    }
+    const isDong = (animal : Animal) : animal is Dog =>{
+        return animal instanceof Dog
+    }
+    const isCat = (animal : Animal) : animal is Cat =>{
+        return animal instanceof Dog
+    }
+    const getAnimal =  (animal : Animal) =>{
+        if(isDong(animal)){
+            animal.makeMewow()
+        }else if(isCat(animal)){
+            animal.makeBark()
+        }else{
+            animal.makesound()
+        }
+    }  
+    const c1 =  new Dog('Dog','Animal')
+    const d1 =  new Cat('Cat','Animal')
+
+
+    
+    getAnimal(c1);
+
+In Type Guard: Based on object , the properties are different from each other. If we know the property we simply check the property is present or not that object . It simply narrow down the object based on their contain properties.
+
+Example 3:
+
+    type Normaluser = {
+        name : string;
+    }
+    
+    type Adminuser = {
+        name : string;
+        roll : number; 
+    }
+
+    const getuser = (user: Normaluser | Adminuser) =>{
+        if('roll' in user){
+            console.log(`My name is ${user.name} and my roll is ${user.roll}`)
+        }else{
+            console.log(`My name is ${user.name}`)
+        }
+    }  
+
+
+    const Jayed : Normaluser = {
+        name : "Jayed Bin Harez"
+    }
+
+    const Jayed1  : Adminuser = {
+        name : "Robiul Islam",
+        roll : 35
+    }
+
+    getuser(Jayed1);
+
+
+

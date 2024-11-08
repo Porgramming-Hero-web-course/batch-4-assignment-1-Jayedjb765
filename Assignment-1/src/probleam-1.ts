@@ -1,4 +1,6 @@
-const sumofarray =  (array: number[]): number =>{
+type sumtotalarray = (arr:number[]) =>  number;
+
+const sumArray : sumtotalarray =  (array) =>{
     let totalsum = 0;
     for (let num of array){
         totalsum = totalsum + num; 
@@ -6,5 +8,5 @@ const sumofarray =  (array: number[]): number =>{
     return totalsum;
 }
 
-const totalsumofarray =  sumofarray([1,2,3,4,5]);
+const totalsumofarray : number =  sumArray([1,2,3,4,5]);
 console.log(totalsumofarray);
